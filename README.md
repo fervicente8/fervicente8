@@ -4,7 +4,7 @@
 <p>I am Fermin Vicente, I live in Buenos Aires, Argentina. I did Henry's bootcamp and I'm a Full Stack web developer.</p>
 
 #### 📫 How to reach me: 
-<p><a href="https://linkedin.com/in/https://www.linkedin.com/in/martin-fiori/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/martin-fiori/" height="30" width="40" /></a></p>
+<p><a href="https://linkedin.com/in/https://www.linkedin.com/in/martin-fiori/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/martin-fiori/" height="30" width="40"/></a> or by E-mail: fferminvicente@gmail.com</p>
 
 #### 👨‍💻 Languages and Tools:
 <p align="left">
