@@ -1,5 +1,7 @@
 ## Hi there 👋
 
+<p align="center"><img src="https://experienciajoven.com/wp-content/uploads/2021/03/que-hace-un-programador-web.gif" alt="bootstrap" width="100%"/></p>
+
 #### 📙 About me: 
 <p>I am Fermin Vicente, I live in Buenos Aires, Argentina. I did Henry's bootcamp and I'm a Full Stack web developer.</p>
 
