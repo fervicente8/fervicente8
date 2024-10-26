@@ -18,6 +18,6 @@ Soy un Desarrollador Web Frontend con experiencia en diversas tecnologías. Me a
 
 ## 📫 Conéctate conmigo
 
-- 📧 [Email](mailto:fferminvicente@gmail.com)
+- 📧 [Email](mailto:ferminvicente8@icloud.com)
 - 💼 [LinkedIn](https://www.linkedin.com/in/fermin-vicente/?trk=opento_sprofile_details)
 - 🌐 [Portfolio](https://ferminvicente.vercel.app/)
