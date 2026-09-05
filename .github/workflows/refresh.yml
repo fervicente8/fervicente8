@@ -1,0 +1,44 @@
+# Regenera los SVG del perfil una vez por día (cambia el "en foco" y la fecha de sync).
+name: refresh assets
+
+on:
+  schedule:
+    - cron: "17 9 * * *"      # 09:17 UTC ≈ 06:17 en Argentina
+  workflow_dispatch:
+  push:
+    paths:
+      - "data/profile.json"
+      - "scripts/build-assets.mjs"
+      - ".github/workflows/refresh.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-assets
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generar SVG
+        run: node scripts/build-assets.mjs
+
+      - name: Commitear si cambió algo
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- assets docs/assets; then
+            echo "sin cambios"
+            exit 0
+          fi
+          git add assets docs/assets
+          git commit -m "chore: refresh assets"
+          git push
