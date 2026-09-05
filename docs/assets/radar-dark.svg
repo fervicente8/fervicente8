@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 900 700" role="img" aria-label="Tech radar: stack usado por Fermín Vicente">
+  <defs>
+    <linearGradient id="pan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0C1322"/><stop offset="1" stop-color="#0A1020"/>
+    </linearGradient>
+    <linearGradient id="sweep" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#4FD8C4" stop-opacity="0"/>
+      <stop offset="1" stop-color="#4FD8C4" stop-opacity=".28"/>
+    </linearGradient>
+    <style>
+      .b text, .b circle { opacity: .34; }
+      .b { animation: wake 12s linear infinite; }
+      .ping { animation: ping 12s linear infinite; transform-box: fill-box; transform-origin: center; }
+      @keyframes wake { 0% { opacity:.42 } 2% { opacity:1 } 26% { opacity:.92 } 70% { opacity:.5 } 100% { opacity:.42 } }
+      @keyframes ping { 0% { opacity:0; transform:scale(1) } 3% { opacity:.9 } 16% { opacity:0; transform:scale(2.6) } 100% { opacity:0; transform:scale(2.6) } }
+      @media (prefers-reduced-motion: reduce) { .b, .ping, .sw { animation: none } .b { opacity: 1 } }
+    </style>
+  </defs>
+  <rect width="900" height="700" rx="20" fill="url(#pan)"/>
+  <rect x="0.75" y="0.75" width="898.5" height="698.5" rx="20" fill="none" stroke="#1B2740"/>
+  <text x="34" y="40" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5A6D8C">~ $ fer radar --stack</text>
+
+  <circle cx="450" cy="348" r="276" fill="none" stroke="#1B2740"/>
+  <circle cx="450" cy="348" r="158.7" fill="none" stroke="#1B2740" stroke-dasharray="3 6"/>
+  <circle cx="450" cy="348" r="230.46" fill="none" stroke="#1B2740" stroke-dasharray="3 6"/>
+  <circle cx="450" cy="348" r="296.7" fill="none" stroke="#1B2740" stroke-dasharray="3 6"/>
+  <line x1="450" y1="348" x2="726" y2="348" stroke="#1B2740"/>
+  <line x1="450" y1="348" x2="450" y2="72" stroke="#1B2740"/>
+  <line x1="450" y1="348" x2="174" y2="348" stroke="#1B2740"/>
+  <line x1="450" y1="348" x2="450" y2="624" stroke="#1B2740"/>
+
+  <g class="sw">
+    <path d="M 450 348 L 456 72 A 276 276 0 0 0 206.31 218.43 Z" fill="url(#sweep)"/>
+    <line x1="450" y1="348" x2="450" y2="72" stroke="#4FD8C4" stroke-width="1.5" opacity=".75"/>
+    <animateTransform attributeName="transform" type="rotate" from="0 450 348" to="360 450 348" dur="12s" repeatCount="indefinite"/>
+  </g>
+
+  <g class="b" style="animation-delay:-9.88s">
+    <circle class="ping" cx="545.34" cy="300.46" r="5" fill="none" stroke="#4FD8C4" stroke-width="1.4" style="animation-delay:-9.88s"/>
+    <circle cx="545.34" cy="300.46" r="4" fill="#4FD8C4"/>
+    <text x="556.34" y="304.26" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Expo</text>
+  </g>
+  <g class="b" style="animation-delay:-11.12s">
+    <circle class="ping" cx="503.69" cy="240.31" r="5" fill="none" stroke="#4FD8C4" stroke-width="1.4" style="animation-delay:-11.12s"/>
+    <circle cx="503.69" cy="240.31" r="4" fill="#4FD8C4"/>
+    <text x="514.69" y="244.11" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">React Native</text>
+  </g>
+  <g class="b" style="animation-delay:-10.08s">
+    <circle class="ping" cx="600.37" cy="252.2" r="5" fill="none" stroke="#F0B357" stroke-width="1.4" style="animation-delay:-10.08s"/>
+    <circle cx="600.37" cy="252.2" r="4" fill="#F0B357"/>
+    <text x="611.37" y="256" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Expo Router</text>
+  </g>
+  <g class="b" style="animation-delay:-11.32s">
+    <circle class="ping" cx="517.27" cy="168.07" r="5" fill="none" stroke="#F0B357" stroke-width="1.4" style="animation-delay:-11.32s"/>
+    <circle cx="517.27" cy="168.07" r="4" fill="#F0B357"/>
+    <text x="528.27" y="171.87" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Reanimated</text>
+  </g>
+  <g class="b" style="animation-delay:-10.5s">
+    <circle class="ping" cx="622.91" cy="175.09" r="5" fill="none" stroke="#5A6D8C" stroke-width="1.4" style="animation-delay:-10.5s"/>
+    <circle cx="622.91" cy="175.09" r="4" fill="#5A6D8C"/>
+    <text x="633.91" y="178.89" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Capacitor</text>
+  </g>
+  <g class="b" style="animation-delay:-0.68s">
+    <circle class="ping" cx="412.98" cy="248.1" r="5" fill="none" stroke="#4FD8C4" stroke-width="1.4" style="animation-delay:-0.68s"/>
+    <circle cx="412.98" cy="248.1" r="4" fill="#4FD8C4"/>
+    <text x="401.98" y="251.9" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">TypeScript</text>
+  </g>
+  <g class="b" style="animation-delay:-1.5s">
+    <circle class="ping" cx="364.91" cy="262.91" r="5" fill="none" stroke="#4FD8C4" stroke-width="1.4" style="animation-delay:-1.5s"/>
+    <circle cx="364.91" cy="262.91" r="4" fill="#4FD8C4"/>
+    <text x="353.91" y="266.71" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Next.js</text>
+  </g>
+  <g class="b" style="animation-delay:-2.32s">
+    <circle class="ping" cx="350.1" cy="310.98" r="5" fill="none" stroke="#4FD8C4" stroke-width="1.4" style="animation-delay:-2.32s"/>
+    <circle cx="350.1" cy="310.98" r="4" fill="#4FD8C4"/>
+    <text x="339.1" y="314.78" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">React</text>
+  </g>
+  <g class="b" style="animation-delay:-1.5s">
+    <circle class="ping" cx="323.93" cy="221.93" r="5" fill="none" stroke="#F0B357" stroke-width="1.4" style="animation-delay:-1.5s"/>
+    <circle cx="323.93" cy="221.93" r="4" fill="#F0B357"/>
+    <text x="312.93" y="225.73" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Tailwind</text>
+  </g>
+  <g class="b" style="animation-delay:-1.5s">
+    <circle class="ping" cx="277.09" cy="175.09" r="5" fill="none" stroke="#5A6D8C" stroke-width="1.4" style="animation-delay:-1.5s"/>
+    <circle cx="277.09" cy="175.09" r="4" fill="#5A6D8C"/>
+    <text x="266.09" y="178.89" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Astro</text>
+  </g>
+  <g class="b" style="animation-delay:-3.68s">
+    <circle class="ping" cx="350.1" cy="385.02" r="5" fill="none" stroke="#4FD8C4" stroke-width="1.4" style="animation-delay:-3.68s"/>
+    <circle cx="350.1" cy="385.02" r="4" fill="#4FD8C4"/>
+    <text x="339.1" y="388.82" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">PostgreSQL</text>
+  </g>
+  <g class="b" style="animation-delay:-4.5s">
+    <circle class="ping" cx="364.91" cy="433.09" r="5" fill="none" stroke="#4FD8C4" stroke-width="1.4" style="animation-delay:-4.5s"/>
+    <circle cx="364.91" cy="433.09" r="4" fill="#4FD8C4"/>
+    <text x="353.91" y="436.89" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Prisma</text>
+  </g>
+  <g class="b" style="animation-delay:-5.32s">
+    <circle class="ping" cx="412.98" cy="447.9" r="5" fill="none" stroke="#4FD8C4" stroke-width="1.4" style="animation-delay:-5.32s"/>
+    <circle cx="412.98" cy="447.9" r="4" fill="#4FD8C4"/>
+    <text x="401.98" y="451.7" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Vercel</text>
+  </g>
+  <g class="b" style="animation-delay:-4.08s">
+    <circle class="ping" cx="299.63" cy="443.8" r="5" fill="none" stroke="#F0B357" stroke-width="1.4" style="animation-delay:-4.08s"/>
+    <circle cx="299.63" cy="443.8" r="4" fill="#F0B357"/>
+    <text x="288.63" y="447.6" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Supabase</text>
+  </g>
+  <g class="b" style="animation-delay:-5.32s">
+    <circle class="ping" cx="382.73" cy="527.93" r="5" fill="none" stroke="#F0B357" stroke-width="1.4" style="animation-delay:-5.32s"/>
+    <circle cx="382.73" cy="527.93" r="4" fill="#F0B357"/>
+    <text x="371.73" y="531.73" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">MongoDB</text>
+  </g>
+  <g class="b" style="animation-delay:-4.5s">
+    <circle class="ping" cx="277.09" cy="520.91" r="5" fill="none" stroke="#5A6D8C" stroke-width="1.4" style="animation-delay:-4.5s"/>
+    <circle cx="277.09" cy="520.91" r="4" fill="#5A6D8C"/>
+    <text x="266.09" y="524.71" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Redis</text>
+  </g>
+  <g class="b" style="animation-delay:-6.88s">
+    <circle class="ping" cx="497.54" cy="443.34" r="5" fill="none" stroke="#4FD8C4" stroke-width="1.4" style="animation-delay:-6.88s"/>
+    <circle cx="497.54" cy="443.34" r="4" fill="#4FD8C4"/>
+    <text x="508.54" y="447.14" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Node.js</text>
+  </g>
+  <g class="b" style="animation-delay:-8.12s">
+    <circle class="ping" cx="557.69" cy="401.69" r="5" fill="none" stroke="#4FD8C4" stroke-width="1.4" style="animation-delay:-8.12s"/>
+    <circle cx="557.69" cy="401.69" r="4" fill="#4FD8C4"/>
+    <text x="568.69" y="405.49" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Express</text>
+  </g>
+  <g class="b" style="animation-delay:-6.88s">
+    <circle class="ping" cx="529.09" cy="507.79" r="5" fill="none" stroke="#F0B357" stroke-width="1.4" style="animation-delay:-6.88s"/>
+    <circle cx="529.09" cy="507.79" r="4" fill="#F0B357"/>
+    <text x="540.09" y="511.59" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Zod</text>
+  </g>
+  <g class="b" style="animation-delay:-7.7s">
+    <circle class="ping" cx="599.29" cy="468.89" r="5" fill="none" stroke="#F0B357" stroke-width="1.4" style="animation-delay:-7.7s"/>
+    <circle cx="599.29" cy="468.89" r="4" fill="#F0B357"/>
+    <text x="610.29" y="472.69" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Auth.js</text>
+  </g>
+  <g class="b" style="animation-delay:-8.52s">
+    <circle class="ping" cx="622.75" cy="392.14" r="5" fill="none" stroke="#F0B357" stroke-width="1.4" style="animation-delay:-8.52s"/>
+    <circle cx="622.75" cy="392.14" r="4" fill="#F0B357"/>
+    <text x="633.75" y="395.94" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Socket.IO</text>
+  </g>
+  <g class="b" style="animation-delay:-7.5s">
+    <circle class="ping" cx="622.91" cy="520.91" r="5" fill="none" stroke="#5A6D8C" stroke-width="1.4" style="animation-delay:-7.5s"/>
+    <circle cx="622.91" cy="520.91" r="4" fill="#5A6D8C"/>
+    <text x="633.91" y="524.71" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#E8EFFA">Anthropic SDK</text>
+  </g>
+  <circle cx="450" cy="348" r="3" fill="#8FA3C0"/>
+
+  <text x="34" y="76" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#8FA3C0" letter-spacing="2.2">WEB</text>
+  <text x="866" y="76" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#8FA3C0" letter-spacing="2.2">MOBILE</text>
+  <text x="34" y="674" text-anchor="start" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#8FA3C0" letter-spacing="2.2">DATA &amp; INFRA</text>
+  <text x="866" y="674" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#8FA3C0" letter-spacing="2.2">BACKEND</text>
+  <circle cx="318" cy="666" r="4.5" fill="#4FD8C4"/>
+  <text x="329" y="670" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#8FA3C0">a diario</text>
+  <circle cx="418" cy="666" r="4.5" fill="#F0B357"/>
+  <text x="429" y="670" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#8FA3C0">sólido</text>
+  <circle cx="518" cy="666" r="4.5" fill="#5A6D8C"/>
+  <text x="529" y="670" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#8FA3C0">explorando</text>
+</svg>

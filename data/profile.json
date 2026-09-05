@@ -1,0 +1,14 @@
+{
+  "name": "Fermín Vicente",
+  "handle": "fervicente8",
+  "location": "Tandil, Argentina",
+  "timezone": "UTC-3",
+  "focus": [
+    "PlaySpot — torneos multideporte sobre Next.js 16 + Prisma",
+    "Altuvia — red aeronáutica: app Expo + API Express + web Next.js",
+    "Alfa Prop — marketplace inmobiliario con Supabase Realtime",
+    "Scannex AI — trazabilidad agro con OCR on-device (ML Kit)",
+    "Clubop — gestión de clubes deportivos, Expo + Cloud Run",
+    "Boxer Containers — catálogo y cotizador en React + Vite"
+  ]
+}

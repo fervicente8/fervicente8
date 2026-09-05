@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="240" viewBox="0 0 900 240" role="img" aria-label="Fermín Vicente — full-stack developer">
+  <defs>
+    <linearGradient id="pan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0C1322"/><stop offset="1" stop-color="#0A1020"/>
+    </linearGradient>
+    <radialGradient id="glw" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4FD8C4" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#4FD8C4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4FD8C4" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#4FD8C4" stop-opacity="0"/>
+    </linearGradient>
+  <clipPath id="rev0"><rect x="93.66839999999999" y="178" height="27" width="0">
+    <animate attributeName="width" dur="13.799999999999999s" repeatCount="indefinite"
+      keyTimes="0;0;0.11;0.28;0.33;1" values="0;0;285.43;285.43;0;0" calcMode="linear"/>
+  </rect></clipPath>
+  <clipPath id="rev1"><rect x="93.66839999999999" y="178" height="27" width="0">
+    <animate attributeName="width" dur="13.799999999999999s" repeatCount="indefinite"
+      keyTimes="0;0.33;0.44;0.62;0.67;1" values="0;0;365.35;365.35;0;0" calcMode="linear"/>
+  </rect></clipPath>
+  <clipPath id="rev2"><rect x="93.66839999999999" y="178" height="27" width="0">
+    <animate attributeName="width" dur="13.799999999999999s" repeatCount="indefinite"
+      keyTimes="0;0.67;0.78;0.95;1;1" values="0;0;285.43;285.43;0;0" calcMode="linear"/>
+  </rect></clipPath>
+  </defs>
+  <rect width="900" height="240" rx="20" fill="url(#pan)"/>
+  <circle cx="800" cy="120" r="230" fill="url(#glw)"/>
+  <rect x="0.75" y="0.75" width="898.5" height="238.5" rx="20" fill="none" stroke="#1B2740"/>
+
+  <circle cx="34" cy="30" r="5.5" fill="#FF5F57"/><circle cx="53" cy="30" r="5.5" fill="#FEBC2E"/><circle cx="72" cy="30" r="5.5" fill="#28C840"/>
+  <text x="94" y="34.5" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#5A6D8C">fervicente8 — dev console</text>
+  <line x1="0" y1="56" x2="900" y2="56" stroke="#1B2740"/>
+
+  <text x="48" y="118" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="42" font-weight="700" fill="#E8EFFA" letter-spacing="-.5">Fermín Vicente</text>
+  <rect x="48" y="130" width="210" height="3" rx="1.5" fill="url(#rule)"/>
+  <text x="48" y="158" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="13" fill="#8FA3C0">full-stack developer · Tandil, Argentina · UTC-3</text>
+
+  <text x="48" y="197" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="19" fill="#4FD8C4">~ $</text>
+  <text x="93.66839999999999" y="197" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="19" fill="#E8EFFA" clip-path="url(#rev0)">full-stack · web + mobile</text>
+  <text x="93.66839999999999" y="197" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="19" fill="#E8EFFA" clip-path="url(#rev1)">Next.js · Expo · Node · Postgres</text>
+  <text x="93.66839999999999" y="197" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="19" fill="#E8EFFA" clip-path="url(#rev2)">de la idea a la App Store</text>
+  <rect y="181" width="11.42" height="21" fill="#4FD8C4" x="93.66839999999999">
+    <animate attributeName="x" dur="13.799999999999999s" repeatCount="indefinite"
+      keyTimes="0;0;0.11;0.28;0.33;0.33;0.44;0.62;0.67;0.67;0.78;0.95;1;1" values="93.67;93.67;379.1;379.1;93.67;93.67;459.02;459.02;93.67;93.67;379.1;379.1;93.67;93.67" calcMode="linear"/>
+    <animate attributeName="opacity" values="1;1;0;0" dur="1.06s" repeatCount="indefinite"/>
+  </rect>
+
+  <g transform="translate(792,124)">
+    <circle cx="0" cy="0" r="22" fill="none" stroke="#4FD8C4" stroke-width="1.2" opacity="0">
+      <animate attributeName="opacity" values="0;.55;0" dur="3.6s" begin="0s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="9.9;22" dur="3.6s" begin="0s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#4FD8C4" stroke-width="1.2" opacity="0">
+      <animate attributeName="opacity" values="0;.55;0" dur="3.6s" begin="0.9s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="18;40" dur="3.6s" begin="0.9s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="58" fill="none" stroke="#4FD8C4" stroke-width="1.2" opacity="0">
+      <animate attributeName="opacity" values="0;.55;0" dur="3.6s" begin="1.8s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="26.1;58" dur="3.6s" begin="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="76" fill="none" stroke="#4FD8C4" stroke-width="1.2" opacity="0">
+      <animate attributeName="opacity" values="0;.55;0" dur="3.6s" begin="2.7s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="34.2;76" dur="3.6s" begin="2.7s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="4" fill="#4FD8C4"/>
+  </g>
+</svg>

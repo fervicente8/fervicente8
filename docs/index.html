@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>fervicente8 — consola</title>
+<meta name="description" content="Consola interactiva de Fermín Vicente: stack, proyectos y contacto. Escribí un comando.">
+<meta name="color-scheme" content="dark light">
+<meta property="og:title" content="fervicente8 — consola">
+<meta property="og:description" content="Terminal interactiva: escribí `help` para empezar.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23080D18'/><text y='70' x='16' font-size='54' font-family='monospace' fill='%234FD8C4'>&gt;_</text></svg>">
+<style>
+  :root{
+    --bg:#080D18; --panel:#0C1322; --panel2:#0A1020; --grid:#1B2740;
+    --text:#E8EFFA; --muted:#8FA3C0; --dim:#5A6D8C; --accent:#4FD8C4; --accent2:#F0B357;
+    --ok:#28C840; --err:#FF7A6E;
+  }
+  :root[data-theme="light"]{
+    --bg:#EEF2F8; --panel:#FFFFFF; --panel2:#F6F9FD; --grid:#DCE4F0;
+    --text:#0C1322; --muted:#54678A; --dim:#8092B0; --accent:#0F8C80; --accent2:#B0741C;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#EEF2F8; --panel:#FFFFFF; --panel2:#F6F9FD; --grid:#DCE4F0;
+      --text:#0C1322; --muted:#54678A; --dim:#8092B0; --accent:#0F8C80; --accent2:#B0741C;
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:radial-gradient(1200px 600px at 80% -10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%), var(--bg);
+    color:var(--text);
+    font-family:ui-monospace,SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
+    font-size:14.5px; line-height:1.62;
+    display:flex; align-items:center; justify-content:center; padding:18px;
+  }
+  .win{
+    width:min(920px,100%); height:min(640px,calc(100dvh - 36px));
+    background:linear-gradient(160deg,var(--panel),var(--panel2));
+    border:1px solid var(--grid); border-radius:16px; overflow:hidden;
+    display:flex; flex-direction:column; box-shadow:0 24px 70px rgba(0,0,0,.38);
+  }
+  .bar{display:flex; align-items:center; gap:8px; padding:11px 14px; border-bottom:1px solid var(--grid); flex:0 0 auto}
+  .dot{width:11px;height:11px;border-radius:50%}
+  .bar h1{font-size:12.5px;font-weight:400;color:var(--dim);margin:0 0 0 8px}
+  .bar button{margin-left:auto;background:none;border:1px solid var(--grid);color:var(--muted);
+    border-radius:8px;padding:3px 10px;font:inherit;font-size:12px;cursor:pointer}
+  .bar button:hover{color:var(--text);border-color:var(--accent)}
+  #out{flex:1 1 auto; overflow-y:auto; padding:16px 18px 4px; overscroll-behavior:contain}
+  #out::-webkit-scrollbar{width:9px} #out::-webkit-scrollbar-thumb{background:var(--grid);border-radius:9px}
+  .row{white-space:pre-wrap; word-break:break-word; margin:0 0 2px}
+  .cmd{color:var(--text)} .cmd .p{color:var(--accent)}
+  .muted{color:var(--muted)} .dim{color:var(--dim)} .acc{color:var(--accent)} .acc2{color:var(--accent2)}
+  .err{color:var(--err)}
+  a{color:var(--accent);text-underline-offset:3px}
+  table{border-collapse:collapse;margin:6px 0 10px}
+  td{padding:1px 16px 1px 0;vertical-align:top}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;padding:8px 18px 4px;flex:0 0 auto}
+  .chip{background:transparent;border:1px solid var(--grid);color:var(--muted);border-radius:999px;
+    padding:4px 11px;font:inherit;font-size:12.5px;cursor:pointer}
+  .chip:hover{color:var(--accent);border-color:var(--accent)}
+  .inputline{display:flex;align-items:center;gap:9px;padding:8px 18px 16px;flex:0 0 auto}
+  .inputline .p{color:var(--accent);flex:0 0 auto}
+  #in{flex:1;background:none;border:0;outline:0;color:var(--text);font:inherit;caret-color:var(--accent);min-width:0}
+  .bar-fill{display:inline-block;height:8px;border-radius:4px;background:var(--accent);vertical-align:middle}
+  .bar-track{display:inline-block;height:8px;border-radius:4px;background:var(--grid);vertical-align:middle;overflow:hidden;width:120px}
+  img.radar{width:100%;max-width:640px;border-radius:12px;border:1px solid var(--grid);margin:6px 0 10px;display:block}
+  @media (max-width:560px){ body{padding:0} .win{height:100dvh;border-radius:0;border:0} #out{padding:12px 13px 4px} .inputline{padding:8px 13px 14px} .chips{padding:6px 13px 2px} }
+  @media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+</style>
+</head>
+<body>
+<div class="win" id="win">
+  <div class="bar">
+    <span class="dot" style="background:#FF5F57"></span>
+    <span class="dot" style="background:#FEBC2E"></span>
+    <span class="dot" style="background:#28C840"></span>
+    <h1>fervicente8@github — ~/consola</h1>
+    <button id="theme" type="button" aria-label="Cambiar tema">tema</button>
+  </div>
+  <div id="out" tabindex="0" aria-live="polite"></div>
+  <div class="chips" id="chips"></div>
+  <form class="inputline" id="form" autocomplete="off">
+    <span class="p">~ $</span>
+    <input id="in" name="cmd" autocapitalize="off" autocorrect="off" spellcheck="false"
+           aria-label="Escribí un comando" placeholder="help">
+  </form>
+</div>
+
+<script>
+const PROFILE = {
+  name: "Fermín Vicente", handle: "fervicente8",
+  where: "Tandil, Buenos Aires, Argentina (UTC−3)",
+  bio: [
+    "Full-stack. Construyo productos de punta a punta: app móvil, web y API.",
+    "Casi todo TypeScript: Next.js del lado web, Expo / React Native en mobile,",
+    "Node + Postgres o Mongo del lado del servidor, y deploy en Vercel.",
+  ],
+  email: "fferminvicente@gmail.com",
+  github: "https://github.com/fervicente8",
+};
+
+const PROJECTS = [
+  { id:"playspot", name:"PlaySpot", tag:"web + mobile",
+    tagEn:'web + mobile',
+    desc:"Plataforma global de torneos para cualquier deporte: web pública, panel de administración y API REST.",
+    en:'Global tournament platform for any sport: public site, admin panel and REST API.',
+    stack:["Next.js 16","TypeScript","Prisma","Postgres (Neon)","Auth.js","next-intl","Capacitor","Zod","Vitest"],
+    url:"https://playspotapp.vercel.app/es" },
+  { id:"altuvia", name:"Altuvia", tag:"publicada en tiendas",
+    tagEn:'shipped to both stores',
+    desc:"Red aeronáutica: vuelos, hangares, combustible, marketplace de aeronaves y paneles de gestión. Monorepo app + API + web.",
+    en:'Aviation network: flights, hangars, fuel, aircraft marketplace and management dashboards.',
+    stack:["Expo","React Native","Express","MongoDB","Next.js","Leaflet","Mercado Pago","JWT"],
+    url:"https://altuvia.net",
+    links:[["App Store","https://apps.apple.com/ar/app/altuvia/id6768280890"],
+           ["Google Play","https://play.google.com/store/apps/details?id=com.altuvia.app"]] },
+  { id:"generala", name:"Generala Online", tag:"open source",
+    tagEn:'open source',
+    desc:"Generala multijugador en tiempo real: salas, amigos, estadísticas y PWA instalable.",
+    en:'Real-time multiplayer dice game: rooms, friends, stats and an installable PWA.',
+    stack:["Next.js","Socket.IO","Prisma","Postgres","Auth.js","Framer Motion"],
+    url:"https://generala-8zq4.onrender.com/",
+    links:[["GitHub","https://github.com/fervicente8/generala"]] },
+  { id:"boxer", name:"Boxer Containers", tag:"web",
+    tagEn:'web',
+    desc:"Sitio y cotizador de contenedores marítimos, con panel y envío de consultas.",
+    en:'Shipping container catalogue and quote tool, with an internal panel.',
+    stack:["React","Vite","Express","Radix UI","Tailwind","Resend"],
+    url:"https://boxer-containers.vercel.app" },
+  { id:"alfa-prop", name:"Alfa Prop", tag:"mobile-first",
+    tagEn:'mobile-first',
+    desc:"Marketplace inmobiliario con match inteligente, chats y visitas. Monorepo con workspaces.",
+    en:"Mobile-first real estate marketplace with smart matching, chats and visits.",
+    stack:["Expo SDK 54","Supabase","Postgres","Zustand","React Query","Reanimated","Zod"],
+    url:"https://alfaprop.net" },
+  { id:"scannexai", name:"Scannex AI", tag:"agro + IA",
+    tagEn:'agro + AI',
+    desc:"Trazabilidad de agroquímicos y semillas. Escaneo con OCR on-device y API de ingesta.",
+    en:"Traceability for agrochemicals and seeds, with on-device OCR scanning.",
+    stack:["Expo","ML Kit (OCR)","Express","MongoDB","Redis","SQL Server","Zod","Pino"],
+    url:"https://scannexai-app.expo.app" },
+  { id:"clubop", name:"Clubop", tag:"gestión",
+    tagEn:'club management',
+    desc:"Plataforma para la gestión de clubes deportivos: socios, accesos y notificaciones.",
+    en:"Sports club management: members, access control and notifications.",
+    stack:["Expo","React Navigation","Express","MongoDB","SQL Server","Cloud Run"],
+    url:"https://www.clubop.com.ar" },
+];
+
+const STACK = {
+  "Lenguaje":      [["TypeScript",95],["JavaScript",90],["SQL",70]],
+  "Web":           [["Next.js (App Router)",92],["React",92],["Tailwind CSS",88],["Astro",55]],
+  "Mobile":        [["Expo / React Native",90],["Reanimated",70],["Capacitor",55]],
+  "Backend":       [["Node.js + Express",88],["Prisma",85],["Auth.js",80],["Zod",85],["Socket.IO",70]],
+  "Datos e infra": [["PostgreSQL (Neon)",85],["MongoDB / Mongoose",82],["Supabase",75],["Vercel",88],["Redis",55]],
+};
+
+/* ------------------------------------------------------------------ salida */
+const out = document.getElementById('out');
+const input = document.getElementById('in');
+const chipsBox = document.getElementById('chips');
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const scroll = () => { out.scrollTop = out.scrollHeight; };
+
+function print(html='', cls='') {
+  const p = document.createElement('p');
+  p.className = 'row ' + cls;
+  p.innerHTML = html;
+  out.appendChild(p); scroll();
+  return p;
+}
+function printLines(lines, cls) { lines.forEach(l => print(l, cls)); }
+function link(url, label) { return `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label||url)}</a>`; }
+function meter(v) {
+  return `<span class="bar-track"><span class="bar-fill" style="width:${v}%"></span></span>`;
+}
+
+/* ---------------------------------------------------------------- comandos */
+const COMMANDS = {
+  help() {
+    print('comandos disponibles', 'dim');
+    const rows = [
+      ['whoami', 'quién soy, en tres líneas'],
+      ['stack', 'tecnologías que uso, por área'],
+      ['radar', 'el tech radar en imagen'],
+      ['projects', 'lista de proyectos'],
+      ['open &lt;id&gt;', 'abre un proyecto (ej: open playspot)'],
+      ['contact', 'cómo escribirme'],
+      ['english', 'switch to English'],
+      ['theme', 'alterna claro / oscuro'],
+      ['clear', 'limpia la pantalla'],
+    ];
+    print('<table>' + rows.map(([c,d]) =>
+      `<tr><td class="acc">${c}</td><td class="muted">${d}</td></tr>`).join('') + '</table>');
+    print('tip: ↑ ↓ recorre el historial, Tab autocompleta.', 'dim');
+  },
+
+  whoami() {
+    print(`<span class="acc2">${esc(PROFILE.name)}</span> <span class="dim">· @${esc(PROFILE.handle)}</span>`);
+    print(esc(PROFILE.where), 'dim');
+    print('');
+    printLines(PROFILE.bio.map(esc), 'muted');
+    print('');
+    print(`Me interesa el producto tanto como el código: pensar el flujo, construirlo`, 'muted');
+    print(`y dejarlo andando en producción con usuarios reales adentro.`, 'muted');
+  },
+
+  stack() {
+    for (const [area, items] of Object.entries(STACK)) {
+      print(`<span class="acc">${esc(area)}</span>`);
+      print('<table>' + items.map(([n,v]) =>
+        `<tr><td class="muted">${esc(n)}</td><td>${meter(v)}</td></tr>`).join('') + '</table>');
+    }
+    print('escribí <span class="acc">radar</span> para verlo como mapa.', 'dim');
+  },
+
+  radar() {
+    print('renderizando radar…', 'dim');
+    const p = print('');
+    p.innerHTML = `<img class="radar" src="assets/radar-dark.svg" alt="Tech radar del stack">`;
+    const img = p.querySelector('img');
+    img.src = radarSrc();
+    img.addEventListener('load', scroll);
+    print('anillos: qué tanto lo uso · cuadrantes: en qué parte del producto.', 'dim');
+  },
+
+  projects() {
+    PROJECTS.forEach(p => {
+      print(`<span class="acc">${esc(p.name)}</span> <span class="dim">[${esc(p.id)}]</span> <span class="acc2">· ${esc(lang === 'en' && p.tagEn ? p.tagEn : p.tag)}</span>`);
+      print(esc(lang === 'en' && p.en ? p.en : p.desc), 'muted');
+      print(`<span class="dim">${p.stack.map(esc).join(' · ')}</span>`);
+      const ls = [];
+      if (p.url) ls.push(link(p.url, lang === 'en' ? 'live ↗' : 'ver en vivo ↗'));
+      (p.links || []).forEach(([label, href]) => ls.push(link(href, label + ' ↗')));
+      print(ls.length ? ls.join('  ·  ') : `<span class="dim">${lang === 'en' ? 'no public demo yet' : 'todavía sin demo pública'}</span>`);
+      print('');
+    });
+    print(lang === 'en'
+      ? 'try <span class="acc">open playspot</span> to open one.'
+      : 'probá <span class="acc">open playspot</span> para abrir uno.', 'dim');
+  },
+
+  open(arg) {
+    if (!arg) return print('uso: open &lt;id&gt; — ej: open altuvia', 'err');
+    const p = PROJECTS.find(x => x.id === arg.toLowerCase() || x.name.toLowerCase() === arg.toLowerCase());
+    if (!p) return print(`no encontré "${esc(arg)}". probá <span class="acc">projects</span>.`, 'err');
+    if (!p.url) return print(`${esc(p.name)} todavía no tiene demo pública.`, 'muted');
+    print(`abriendo ${esc(p.name)} → ${link(p.url)}`, 'muted');
+    window.open(p.url, '_blank', 'noopener');
+  },
+
+  contact() {
+    print('<table>'
+      + `<tr><td class="muted">email</td><td>${link('mailto:'+PROFILE.email, PROFILE.email)}</td></tr>`
+      + `<tr><td class="muted">github</td><td>${link(PROFILE.github,'@'+PROFILE.handle)}</td></tr>`
+      + '</table>');
+    print('respondo rápido. si es sobre un proyecto, contame el contexto y el plazo.', 'dim');
+  },
+
+  english() {
+    lang = lang === 'en' ? 'es' : 'en';
+    if (lang === 'en') {
+      print('<span class="acc2">Fermín Vicente</span> <span class="dim">· @fervicente8 · Tandil, Argentina (UTC−3)</span>');
+      print('');
+      print('Full-stack developer. I build products end to end — mobile app, web and API —', 'muted');
+      print('mostly in TypeScript: Next.js on the web, Expo / React Native on mobile,', 'muted');
+      print('Node with Postgres or Mongo on the server.', 'muted');
+      print('');
+      print('Everything is in English now. Try <span class="acc">projects</span>, or <span class="acc">english</span> again to switch back.', 'dim');
+    } else {
+      print('Listo, volvemos al español. Probá <span class="acc">projects</span>.', 'dim');
+    }
+  },
+
+  theme() { toggleTheme(); print('tema: ' + currentTheme(), 'dim'); },
+  clear() { out.innerHTML = ''; },
+
+  sudo() { print('nice try 🙂 acá no hay root, solo TypeScript.', 'acc2'); },
+  generala() {
+    const d = Array.from({length:5}, () => 1 + Math.floor(Math.random()*6));
+    const faces = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+    print(d.map(n => faces[n-1]).join('  '), 'acc');
+    const counts = d.reduce((m,n)=>(m[n]=(m[n]||0)+1,m),{});
+    const max = Math.max(...Object.values(counts));
+    const label = max===5 ? '¡GENERALA!' : max===4 ? 'póker' : max===3 ? 'full en camino' : 'a tirar de nuevo';
+    print(label + ' — jugá de verdad en ' + link(PROJECTS.find(p=>p.id==='generala').url,'generala online ↗'), 'muted');
+  },
+};
+const ALIASES = { ls:'projects', cat:'whoami', about:'whoami', skills:'stack', tech:'stack',
+                  '?':'help', man:'help', mail:'contact', email:'contact', cls:'clear', exit:'clear',
+                  en:'english', lang:'english', ingles:'english', 'inglés':'english' };
+let lang = 'es';
+
+/* ------------------------------------------------------------------- shell */
+const history = [];
+let hIdx = -1;
+
+function run(raw) {
+  const line = raw.trim();
+  print(`<span class="p">~ $</span> <span class="cmd">${esc(line)}</span>`);
+  if (!line) return;
+  history.unshift(line); hIdx = -1;
+  const [rawCmd, ...rest] = line.split(/\s+/);
+  const cmd = ALIASES[rawCmd.toLowerCase()] || rawCmd.toLowerCase();
+  const fn = COMMANDS[cmd];
+  if (!fn) {
+    print(`comando no encontrado: ${esc(rawCmd)}`, 'err');
+    const near = Object.keys(COMMANDS).find(c => c.startsWith(cmd[0]));
+    print(near ? `¿quisiste decir <span class="acc">${near}</span>? escribí <span class="acc">help</span>.` : 'escribí <span class="acc">help</span>.', 'dim');
+    return;
+  }
+  fn(rest.join(' '));
+  print('');
+}
+
+document.getElementById('form').addEventListener('submit', e => {
+  e.preventDefault();
+  run(input.value); input.value = '';
+});
+
+input.addEventListener('keydown', e => {
+  if (e.key === 'ArrowUp')   { e.preventDefault(); if (history.length) { hIdx = Math.min(hIdx+1, history.length-1); input.value = history[hIdx]; } }
+  if (e.key === 'ArrowDown') { e.preventDefault(); hIdx = Math.max(hIdx-1, -1); input.value = hIdx < 0 ? '' : history[hIdx]; }
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const v = input.value.trim().toLowerCase();
+    if (!v) return;
+    const m = Object.keys(COMMANDS).filter(c => c.startsWith(v));
+    if (m.length === 1) input.value = m[0] + ' ';
+    else if (m.length > 1) print(m.map(x=>`<span class="acc">${x}</span>`).join('   '), 'dim');
+  }
+});
+
+// clic en cualquier lado = foco en el prompt (salvo que estés seleccionando o tocando un link)
+document.getElementById('win').addEventListener('click', e => {
+  if (e.target.closest('a,button') || String(window.getSelection())) return;
+  input.focus();
+});
+
+const CHIPS = ['whoami','stack','radar','projects','contact','english','help'];
+CHIPS.forEach(c => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'chip'; b.textContent = c;
+  b.addEventListener('click', () => { run(c); input.focus(); });
+  chipsBox.appendChild(b);
+});
+
+/* ------------------------------------------------------------------- tema */
+function currentTheme() {
+  return document.documentElement.dataset.theme
+    || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+}
+function radarSrc() {
+  return currentTheme() === 'light' ? 'assets/radar-light.svg' : 'assets/radar-dark.svg';
+}
+function applyTheme(t) {
+  document.documentElement.dataset.theme = t;
+  try { localStorage.setItem('fv-theme', t); } catch {}
+  out.querySelectorAll('img.radar').forEach(img => { img.src = radarSrc(); });
+}
+function toggleTheme() { applyTheme(currentTheme() === 'light' ? 'dark' : 'light'); }
+document.getElementById('theme').addEventListener('click', toggleTheme);
+try {
+  const saved = localStorage.getItem('fv-theme');
+  if (saved) applyTheme(saved);
+  else if (matchMedia('(prefers-color-scheme: light)').matches) applyTheme('light');
+} catch {}
+
+/* ------------------------------------------------------------------- boot */
+const BOOT = [
+  ['<span class="dim">fervicente8 console v1.0 — build ' + new Date().toISOString().slice(0,10) + '</span>', 90],
+  ['<span class="dim">montando /proyectos …</span>', 220],
+  ['<span class="dim">' + PROJECTS.length + ' proyectos · ' + Object.values(STACK).flat().length + ' tecnologías · listo</span>', 260],
+  ['', 60],
+];
+let bi = 0;
+(function boot() {
+  if (bi >= BOOT.length) {
+    print('Hola 👋 soy <span class="acc2">' + esc(PROFILE.name) + '</span>. Esto es una terminal de verdad: escribí algo.');
+    print('empezá por <span class="acc">help</span>, <span class="acc">projects</span> o <span class="acc">radar</span>.', 'dim');
+    print('');
+    input.focus({ preventScroll:true });
+    return;
+  }
+  const [html, delay] = BOOT[bi++];
+  print(html);
+  setTimeout(boot, delay);
+})();
+</script>
+</body>
+</html>
