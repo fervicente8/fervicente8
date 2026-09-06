@@ -3,6 +3,9 @@
     <linearGradient id="pan" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0C1322"/><stop offset="1" stop-color="#0A1020"/>
     </linearGradient>
+    <linearGradient id="pan2" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="900" y2="240">
+      <stop offset="0" stop-color="#0C1322"/><stop offset="1" stop-color="#0A1020"/>
+    </linearGradient>
     <radialGradient id="glw" cx="0.5" cy="0.5" r="0.5">
       <stop offset="0" stop-color="#4FD8C4" stop-opacity="0.24"/>
       <stop offset="1" stop-color="#4FD8C4" stop-opacity="0"/>
@@ -11,18 +14,6 @@
       <stop offset="0" stop-color="#4FD8C4" stop-opacity=".9"/>
       <stop offset="1" stop-color="#4FD8C4" stop-opacity="0"/>
     </linearGradient>
-  <clipPath id="rev0"><rect x="93.66839999999999" y="178" height="27" width="0">
-    <animate attributeName="width" dur="13.799999999999999s" repeatCount="indefinite"
-      keyTimes="0;0;0.11;0.28;0.33;1" values="0;0;285.43;285.43;0;0" calcMode="linear"/>
-  </rect></clipPath>
-  <clipPath id="rev1"><rect x="93.66839999999999" y="178" height="27" width="0">
-    <animate attributeName="width" dur="13.799999999999999s" repeatCount="indefinite"
-      keyTimes="0;0.33;0.44;0.62;0.67;1" values="0;0;365.35;365.35;0;0" calcMode="linear"/>
-  </rect></clipPath>
-  <clipPath id="rev2"><rect x="93.66839999999999" y="178" height="27" width="0">
-    <animate attributeName="width" dur="13.799999999999999s" repeatCount="indefinite"
-      keyTimes="0;0.67;0.78;0.95;1;1" values="0;0;285.43;285.43;0;0" calcMode="linear"/>
-  </rect></clipPath>
   </defs>
   <rect width="900" height="240" rx="20" fill="url(#pan)"/>
   <circle cx="800" cy="120" r="230" fill="url(#glw)"/>
@@ -37,12 +28,18 @@
   <text x="48" y="158" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="13" fill="#8FA3C0">full-stack developer · Tandil, Argentina · UTC-3</text>
 
   <text x="48" y="197" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="19" fill="#4FD8C4">~ $</text>
-  <text x="93.66839999999999" y="197" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="19" fill="#E8EFFA" clip-path="url(#rev0)">full-stack · web + mobile</text>
-  <text x="93.66839999999999" y="197" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="19" fill="#E8EFFA" clip-path="url(#rev1)">Next.js · Expo · Node · Postgres</text>
-  <text x="93.66839999999999" y="197" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="19" fill="#E8EFFA" clip-path="url(#rev2)">de la idea a la App Store</text>
-  <rect y="181" width="11.42" height="21" fill="#4FD8C4" x="93.66839999999999">
-    <animate attributeName="x" dur="13.799999999999999s" repeatCount="indefinite"
-      keyTimes="0;0;0.11;0.28;0.33;0.33;0.44;0.62;0.67;0.67;0.78;0.95;1;1" values="93.67;93.67;379.1;379.1;93.67;93.67;459.02;459.02;93.67;93.67;379.1;379.1;93.67;93.67" calcMode="linear"/>
+  <text x="93.6" y="197" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="19" fill="#E8EFFA" opacity="1">full-stack · web + mobile<animate attributeName="opacity" dur="15.149999999999999s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.33" values="1;0"/></text>
+  <text x="93.6" y="197" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="19" fill="#E8EFFA" opacity="0">Next.js · Expo · Node · Postgres<animate attributeName="opacity" dur="15.149999999999999s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.33;0.67" values="0;1;0"/></text>
+  <text x="93.6" y="197" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospace" font-size="19" fill="#E8EFFA" opacity="0">de la idea a la App Store<animate attributeName="opacity" dur="15.149999999999999s" repeatCount="indefinite" calcMode="discrete" keyTimes="0;0.67" values="0;1"/></text>
+  <rect x="481.2" y="176" width="0" height="29" fill="url(#pan2)">
+    <animate attributeName="x" dur="15.149999999999999s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.1;0.1;0.26;0.26;0.31;0.33;0.33;0.43;0.43;0.59;0.59;0.64;0.67;0.67;0.77;0.77;0.92;0.92;0.98;1" values="93.6;378.6;481.2;481.2;378.6;93.6;93.6;93.6;458.4;481.2;481.2;458.4;93.6;93.6;93.6;378.6;481.2;481.2;378.6;93.6;93.6"/>
+    <animate attributeName="width" dur="15.149999999999999s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.1;0.1;0.26;0.26;0.31;0.33;0.33;0.43;0.43;0.59;0.59;0.64;0.67;0.67;0.77;0.77;0.92;0.92;0.98;1" values="387.6;102.6;0;0;102.6;387.6;387.6;387.6;22.8;0;0;22.8;387.6;387.6;387.6;102.6;0;0;102.6;387.6;387.6"/>
+  </rect>
+  <rect x="378.6" y="181" width="11.4" height="21" fill="#4FD8C4">
+    <animate attributeName="x" dur="15.149999999999999s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.1;0.26;0.31;0.33;0.33;0.43;0.59;0.64;0.67;0.67;0.77;0.92;0.98;1" values="93.6;378.6;378.6;93.6;93.6;93.6;458.4;458.4;93.6;93.6;93.6;378.6;378.6;93.6;93.6"/>
     <animate attributeName="opacity" values="1;1;0;0" dur="1.06s" repeatCount="indefinite"/>
   </rect>
 

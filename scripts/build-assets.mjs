@@ -36,35 +36,44 @@ function hero(t) {
     'Next.js · Expo · Node · Postgres',
     'de la idea a la App Store',
   ];
-  const FS = 19, CW = FS * 0.6009;           // ancho de avance en monoespaciada
+  const FS = 19, CW = FS * 0.6;              // ancho de avance en monoespaciada
   const X0 = 48, BASE = 197;
-  const promptW = 4 * CW;                     // "~ $ "
-  const textX = X0 + promptW;
-  const SLOT = 4.6, TYPE = 1.5, HOLD = 2.4;   // segundos
+  const textX = X0 + 4 * CW;                  // después de "~ $ "
+  const TYPE = 1.5, HOLD = 2.4, ERASE = 0.8, GAP = 0.35;   // segundos
+  const SLOT = TYPE + HOLD + ERASE + GAP;
   const T = SLOT * phrases.length;
+  const LINE_Y = BASE - FS - 2, LINE_H = FS + 10;
 
-  // Cursor único: recorre las tres frases en un solo timeline.
-  const ck = [0], cv = [textX];
+  // Tapa del color del panel: revela la frase moviéndose hacia la derecha.
+  // Nada de clip-path ni mask: hay renderers de GitHub que los descartan y
+  // entonces las tres frases se dibujan una encima de otra.
+  const COVER = textX + (Math.max(...phrases.map((p) => p.length)) + 2) * CW;
+
+  const mk = [], mv = [];                     // máscara: tapa de x hasta COVER
+  const ck = [], cv = [];                     // cursor
   phrases.forEach((p, i) => {
-    const w = p.length * CW, t0 = i * SLOT;
-    ck.push(t0, t0 + TYPE, t0 + HOLD + TYPE, t0 + SLOT);
-    cv.push(textX, textX + w, textX + w, textX);
+    const t0 = i * SLOT, endX = textX + p.length * CW;
+    // ...tipea... | salta a COVER para mostrar la frase entera durante el hold
+    // (así un ancho de fuente distinto nunca deja letras tapadas) | ...borra...
+    mk.push(t0, t0 + TYPE, t0 + TYPE, t0 + TYPE + HOLD, t0 + TYPE + HOLD, t0 + TYPE + HOLD + ERASE, t0 + SLOT);
+    mv.push(textX, endX, COVER, COVER, endX, textX, textX);
+    ck.push(t0, t0 + TYPE, t0 + TYPE + HOLD, t0 + TYPE + HOLD + ERASE, t0 + SLOT);
+    cv.push(textX, endX, endX, textX, textX);
   });
-  ck.push(T); cv.push(textX);
 
-  const clips = phrases.map((p, i) => {
-    const w = p.length * CW, t0 = i * SLOT;
-    const k = [0, t0, t0 + TYPE, t0 + HOLD + TYPE, t0 + SLOT, T];
-    const v = [0, 0, w, w, 0, 0];
-    return `  <clipPath id="rev${i}"><rect x="${textX}" y="${BASE - FS}" height="${FS + 8}" width="0">
-    <animate attributeName="width" dur="${T}s" repeatCount="indefinite"
-      keyTimes="${k.map((x) => r2(x / T)).join(';')}" values="${v.map(r2).join(';')}" calcMode="linear"/>
-  </rect></clipPath>`;
+  // Sin animaciones (renderers que las descartan) queda la primera frase
+  // completa, la tapa cerrada en 0 y el cursor al final de la línea.
+  const keys = (a) => a.map((x) => r2(x / T)).join(';');
+  const vals = (a) => a.map(r2).join(';');
+
+  const lines = phrases.map((p, i) => {
+    const t0 = i * SLOT;
+    const k = [0], v = [i === 0 ? 1 : 0];
+    if (t0 > 0) { k.push(t0 / T); v.push(1); }
+    if (t0 + SLOT < T) { k.push((t0 + SLOT) / T); v.push(0); }
+    // sin saltos de línea dentro del <text>: cualquier espacio suelto correría la frase
+    return `  <text x="${r2(textX)}" y="${BASE}" font-family="${MONO}" font-size="${FS}" fill="${t.text}" opacity="${i === 0 ? 1 : 0}">${esc(p)}<animate attributeName="opacity" dur="${T}s" repeatCount="indefinite" calcMode="discrete" keyTimes="${k.map(r2).join(';')}" values="${v.join(';')}"/></text>`;
   }).join('\n');
-
-  const lines = phrases.map((p, i) =>
-    `  <text x="${textX}" y="${BASE}" font-family="${MONO}" font-size="${FS}" fill="${t.text}" clip-path="url(#rev${i})">${esc(p)}</text>`
-  ).join('\n');
 
   const echo = [22, 40, 58, 76].map((rad, i) =>
     `    <circle cx="0" cy="0" r="${rad}" fill="none" stroke="${t.accent}" stroke-width="1.2" opacity="0">
@@ -77,6 +86,9 @@ function hero(t) {
     <linearGradient id="pan" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="${t.panel}"/><stop offset="1" stop-color="${t.panel2}"/>
     </linearGradient>
+    <linearGradient id="pan2" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${W}" y2="${H}">
+      <stop offset="0" stop-color="${t.panel}"/><stop offset="1" stop-color="${t.panel2}"/>
+    </linearGradient>
     <radialGradient id="glw" cx="0.5" cy="0.5" r="0.5">
       <stop offset="0" stop-color="${t.glow}" stop-opacity="${t.bg === '#FFFFFF' ? 0.16 : 0.24}"/>
       <stop offset="1" stop-color="${t.glow}" stop-opacity="0"/>
@@ -85,7 +97,6 @@ function hero(t) {
       <stop offset="0" stop-color="${t.accent}" stop-opacity=".9"/>
       <stop offset="1" stop-color="${t.accent}" stop-opacity="0"/>
     </linearGradient>
-${clips}
   </defs>
   <rect width="${W}" height="${H}" rx="20" fill="url(#pan)"/>
   <circle cx="800" cy="120" r="230" fill="url(#glw)"/>
@@ -101,9 +112,15 @@ ${clips}
 
   <text x="${X0}" y="${BASE}" font-family="${MONO}" font-size="${FS}" fill="${t.accent}">~ $</text>
 ${lines}
-  <rect y="${BASE - FS + 3}" width="${r2(CW)}" height="${FS + 2}" fill="${t.accent}" x="${textX}">
-    <animate attributeName="x" dur="${T}s" repeatCount="indefinite"
-      keyTimes="${ck.map((x) => r2(x / T)).join(';')}" values="${cv.map(r2).join(';')}" calcMode="linear"/>
+  <rect x="${r2(COVER)}" y="${LINE_Y}" width="0" height="${LINE_H}" fill="url(#pan2)">
+    <animate attributeName="x" dur="${T}s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="${keys(mk)}" values="${vals(mv)}"/>
+    <animate attributeName="width" dur="${T}s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="${keys(mk)}" values="${vals(mv.map((x) => COVER - x))}"/>
+  </rect>
+  <rect x="${r2(cv[1])}" y="${BASE - FS + 3}" width="${r2(CW)}" height="${FS + 2}" fill="${t.accent}">
+    <animate attributeName="x" dur="${T}s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="${keys(ck)}" values="${vals(cv)}"/>
     <animate attributeName="opacity" values="1;1;0;0" dur="1.06s" repeatCount="indefinite"/>
   </rect>
 
