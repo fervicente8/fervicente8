@@ -3,7 +3,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)"  srcset="assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg">
-  <img alt="Fermín Vicente — full-stack developer" src="assets/hero-dark.svg" width="100%">
+  <img alt="Fermín Vicente — full-stack developer" src="assets/hero-dark.svg" width="900" height="240">
 </picture>
 
 ### [`▶  abrir la consola interactiva`](https://fervicente8.github.io/fervicente8/)
@@ -17,7 +17,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)"  srcset="assets/status-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/status-light.svg">
-  <img alt="En foco esta semana" src="assets/status-dark.svg" width="100%">
+  <img alt="En foco esta semana" src="assets/status-dark.svg" width="900" height="118">
 </picture>
 
 <br>
@@ -47,7 +47,7 @@ Construyo productos completos: app móvil, web y API. Casi todo en **TypeScript*
 <picture>
   <source media="(prefers-color-scheme: dark)"  srcset="assets/radar-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/radar-light.svg">
-  <img alt="Tech radar: TypeScript, Next.js, Expo, Node, Postgres, MongoDB, Supabase" src="assets/radar-dark.svg" width="100%">
+  <img alt="Tech radar: TypeScript, Next.js, Expo, Node, Postgres, MongoDB, Supabase" src="assets/radar-dark.svg" width="900" height="700">
 </picture>
 
 <br>
